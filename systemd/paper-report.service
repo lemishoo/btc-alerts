@@ -1,0 +1,8 @@
+[Unit]
+Description=BTC Alerts - Daily Paper Trading Report
+
+[Service]
+Type=oneshot
+WorkingDirectory=/home/michal/apps/btc-alerts
+ExecStart=/home/michal/apps/btc-alerts/.venv/bin/python /home/michal/apps/btc-alerts/daily_paper_report.py
+Environment=TZ_LOCAL=Europe/Bratislava
