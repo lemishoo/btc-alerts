@@ -2,8 +2,8 @@
   "symbol": "BTCUSDT",
   "last_regime": "TRANSITION",
   "last_regime_sent": "TRANSITION",
-  "last_regime_alert_ts": 1768814163.1722791,
-  "last_ok_ts": 1768814223.2249966,
+  "last_regime_alert_ts": 1768818666.5217488,
+  "last_ok_ts": 1768819086.8859417,
   "last_setup_ts": {
     "MEAN_REVERT_LONG": 1768227375.1837897,
     "ETHUSDT:MEAN_REVERT_LONG": 1768803109.9108703,
