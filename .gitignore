@@ -1,0 +1,21 @@
+# secrets
+.env
+
+# python
+__pycache__/
+*.pyc
+*.pyo
+
+# venv
+.venv/
+
+# logs & runtime
+run.log
+paper_exec.log
+signals.jsonl
+paper_trades.csv
+
+# editor
+*.swp
+.DS_Store
+.env
