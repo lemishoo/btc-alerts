@@ -1,0 +1,873 @@
+nohup: ignoring input
+[paper] start equity=1000.0 USDT, leverage=5x, risk=0.50%
+[paper] reading signals from /home/michal/apps/btc-alerts/signals.jsonl
+[paper] state=/home/michal/apps/btc-alerts/paper_state.json offset=0 tail_lines=200
+[paper] PLAN ETH/USDT:USDT entry=3294.0000 sl=3289.0000 tp1=3317.0000 tp2=3340.0000 qty=1.000000
+[paper] heartbeat alive | open=1 | cooldowns=0
+[paper] heartbeat alive | open=1 | cooldowns=0
+[paper] CANCEL ETH/USDT:USDT reason=ENTRY_TIMEOUT_1800s entry=3294.0000
+[paper] heartbeat alive | open=0 | cooldowns=1
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] PLAN ETH/USDT:USDT entry=3301.8315 sl=3296.0528 tp1=3309.4750 tp2=3317.1185 qty=0.865247
+[paper] heartbeat alive | open=1 | cooldowns=0
+[paper] PLAN BTC/USDT:USDT entry=95499.4518 sl=95332.3223 tp1=95618.8000 tp2=95738.1482 qty=0.029917
+[paper] FILLED BTC/USDT:USDT side=LONG entry=95499.4518 qty=0.029917
+[paper] FILLED ETH/USDT:USDT side=LONG entry=3301.8315 qty=0.865247
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] CLOSE BTC/USDT:USDT SL hit px=95325.0000 pnl=-5.22USDT
+[paper] heartbeat alive | open=1 | cooldowns=1
+[paper] CLOSE ETH/USDT:USDT SL hit px=3294.7500 pnl=-6.13USDT
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] PLAN ZEC/USDT:USDT entry=408.3373 sl=406.6690 tp1=411.3450 tp2=414.3527 qty=2.997063
+[paper] heartbeat alive | open=1 | cooldowns=0
+[paper] heartbeat alive | open=1 | cooldowns=0
+[paper] FILLED ZEC/USDT:USDT side=LONG entry=408.3373 qty=2.997063
+[paper] CLOSE ZEC/USDT:USDT SL hit px=406.6200 pnl=-5.15USDT
+[paper] heartbeat alive | open=0 | cooldowns=1
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] PLAN ZEC/USDT:USDT entry=406.8523 sl=405.2215 tp1=410.6100 tp2=414.3677 qty=3.065980
+[paper] heartbeat alive | open=1 | cooldowns=0
+[paper] FILLED ZEC/USDT:USDT side=LONG entry=406.8523 qty=3.065980
+[paper] heartbeat alive | open=1 | cooldowns=0
+[paper] PLAN BTC/USDT:USDT entry=95277.1980 sl=95110.4531 tp1=95374.2000 tp2=95471.2020 qty=0.029986
+[paper] PLAN SOL/USDT:USDT entry=142.6941 sl=142.0900 tp1=143.1950 tp2=143.6959 qty=8.276775
+[paper] heartbeat alive | open=3 | cooldowns=0
+[paper] heartbeat alive | open=3 | cooldowns=0
+[paper] heartbeat alive | open=3 | cooldowns=0
+[paper] CANCEL BTC/USDT:USDT reason=ENTRY_TIMEOUT_1800s entry=95277.1980
+[paper] CANCEL SOL/USDT:USDT reason=ENTRY_TIMEOUT_1800s entry=142.6941
+[paper] CLOSE ZEC/USDT:USDT SL hit px=404.0200 pnl=-8.68USDT
+[paper] heartbeat alive | open=0 | cooldowns=1
+[paper] PLAN BTC/USDT:USDT entry=95304.7481 sl=95137.8779 tp1=95387.9500 tp2=95471.1519 qty=0.029963
+[paper] heartbeat alive | open=1 | cooldowns=0
+[paper] FILLED BTC/USDT:USDT side=LONG entry=95304.7481 qty=0.029963
+[paper] TP1 BTC/USDT:USDT px=95397.0000 close_qty=0.014982 pnl_add=1.38
+[paper] heartbeat alive | open=1 | cooldowns=0
+[paper] heartbeat alive | open=1 | cooldowns=0
+[paper] heartbeat alive | open=1 | cooldowns=0
+[paper] CLOSE BTC/USDT:USDT SL hit px=95135.0000 pnl=-3.70USDT
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] PLAN ZEC/USDT:USDT entry=411.9795 sl=410.5808 tp1=414.4550 tp2=416.9305 qty=3.574748
+[paper] FILLED ZEC/USDT:USDT side=LONG entry=411.9795 qty=3.574748
+[paper] heartbeat alive | open=1 | cooldowns=0
+[paper] CLOSE ZEC/USDT:USDT SL hit px=410.5500 pnl=-5.11USDT
+[paper] heartbeat alive | open=0 | cooldowns=1
+[paper] PLAN ZEC/USDT:USDT entry=410.6479 sl=409.2282 tp1=413.7850 tp2=416.9221 qty=3.521871
+[paper] FILLED ZEC/USDT:USDT side=LONG entry=410.6479 qty=3.521871
+[paper] heartbeat alive | open=1 | cooldowns=0
+[paper] PLAN SOL/USDT:USDT entry=144.6012 sl=144.0000 tp1=145.0000 tp2=145.3988 qty=8.316700
+[paper] FILLED SOL/USDT:USDT side=LONG entry=144.6012 qty=8.316700
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] CLOSE ZEC/USDT:USDT SL hit px=409.1400 pnl=-5.31USDT
+[paper] heartbeat alive | open=1 | cooldowns=1
+[paper] heartbeat alive | open=1 | cooldowns=0
+[paper] PLAN ZEC/USDT:USDT entry=405.8934 sl=404.3849 tp1=410.4900 tp2=415.0866 qty=3.314551
+[paper] FILLED ZEC/USDT:USDT side=LONG entry=405.8934 qty=3.314551
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] PLAN ETH/USDT:USDT entry=3287.3613 sl=3281.6081 tp1=3291.9600 tp2=3296.5587 qty=0.869082
+[paper] heartbeat alive | open=3 | cooldowns=0
+[paper] heartbeat alive | open=3 | cooldowns=0
+[paper] FILLED ETH/USDT:USDT side=LONG entry=3287.3613 qty=0.869082
+[paper] heartbeat alive | open=3 | cooldowns=0
+[paper] heartbeat alive | open=3 | cooldowns=0
+[paper] heartbeat alive | open=3 | cooldowns=0
+[paper] TP1 ZEC/USDT:USDT px=410.5200 close_qty=1.657275 pnl_add=7.67
+[paper] heartbeat alive | open=3 | cooldowns=0
+[paper] heartbeat alive | open=3 | cooldowns=0
+[paper] heartbeat alive | open=3 | cooldowns=0
+[paper] heartbeat alive | open=3 | cooldowns=0
+[paper] heartbeat alive | open=3 | cooldowns=0
+[paper] heartbeat alive | open=3 | cooldowns=0
+[paper] heartbeat alive | open=3 | cooldowns=0
+[paper] CLOSE ZEC/USDT:USDT SL hit px=404.1000 pnl=1.72USDT
+[paper] heartbeat alive | open=2 | cooldowns=1
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] PLAN ZEC/USDT:USDT entry=403.6050 sl=402.1175 tp1=407.2900 tp2=410.9750 qty=3.361345
+[paper] FILLED ZEC/USDT:USDT side=LONG entry=403.6050 qty=3.361345
+[paper] heartbeat alive | open=3 | cooldowns=0
+[paper] heartbeat alive | open=3 | cooldowns=0
+[paper] heartbeat alive | open=3 | cooldowns=0
+[paper] heartbeat alive | open=3 | cooldowns=0
+[paper] heartbeat alive | open=3 | cooldowns=0
+[paper] heartbeat alive | open=3 | cooldowns=0
+[paper] TP1 ETH/USDT:USDT px=3292.1300 close_qty=0.434541 pnl_add=2.07
+[paper] heartbeat alive | open=3 | cooldowns=0
+[paper] CLOSE SOL/USDT:USDT SL hit px=143.9600 pnl=-5.33USDT
+[paper] heartbeat alive | open=2 | cooldowns=1
+[paper] PLAN SOL/USDT:USDT entry=143.9808 sl=143.3800 tp1=144.2200 tp2=144.4592 qty=8.322237
+[paper] FILLED SOL/USDT:USDT side=LONG entry=143.9808 qty=8.322237
+[paper] heartbeat alive | open=3 | cooldowns=0
+[paper] heartbeat alive | open=3 | cooldowns=0
+[paper] PLAN BTC/USDT:USDT entry=95275.8956 sl=95109.1566 tp1=95279.2000 tp2=95282.5044 qty=0.029987
+[paper] FILLED BTC/USDT:USDT side=LONG entry=95275.8956 qty=0.029987
+[paper] heartbeat alive | open=4 | cooldowns=0
+[paper] TP1 BTC/USDT:USDT px=95279.6000 close_qty=0.014993 pnl_add=0.06
+[paper] heartbeat alive | open=4 | cooldowns=0
+[paper] heartbeat alive | open=4 | cooldowns=0
+[paper] heartbeat alive | open=4 | cooldowns=0
+[paper] heartbeat alive | open=4 | cooldowns=0
+[paper] CLOSE BTC/USDT:USDT TP2 hit px=95290.1000 pnl=0.27USDT
+[paper] heartbeat alive | open=3 | cooldowns=1
+[paper] PLAN BTC/USDT:USDT entry=95199.6413 sl=95033.0380 tp1=95239.5500 tp2=95279.4587 qty=0.030011
+[paper] heartbeat alive | open=4 | cooldowns=0
+[paper] FILLED BTC/USDT:USDT side=LONG entry=95199.6413 qty=0.030011
+[paper] heartbeat alive | open=4 | cooldowns=0
+[paper] heartbeat alive | open=4 | cooldowns=0
+[paper] heartbeat alive | open=4 | cooldowns=0
+[paper] heartbeat alive | open=4 | cooldowns=0
+[paper] heartbeat alive | open=4 | cooldowns=0
+[paper] CLOSE BTC/USDT:USDT SL hit px=95020.4000 pnl=-5.38USDT
+[paper] heartbeat alive | open=3 | cooldowns=1
+[paper] PLAN BTC/USDT:USDT entry=95066.4466 sl=94900.0801 tp1=95173.0000 tp2=95279.5534 qty=0.030054
+[paper] FILLED BTC/USDT:USDT side=LONG entry=95066.4466 qty=0.030054
+[paper] heartbeat alive | open=4 | cooldowns=0
+[paper] TP1 ZEC/USDT:USDT px=407.3700 close_qty=1.680673 pnl_add=6.33
+[paper] heartbeat alive | open=4 | cooldowns=0
+[paper] heartbeat alive | open=4 | cooldowns=0
+[paper] TP1 BTC/USDT:USDT px=95188.1000 close_qty=0.015027 pnl_add=1.83
+[paper] heartbeat alive | open=4 | cooldowns=0
+[paper] heartbeat alive | open=4 | cooldowns=0
+[paper] heartbeat alive | open=4 | cooldowns=0
+[paper] heartbeat alive | open=4 | cooldowns=0
+[paper] heartbeat alive | open=4 | cooldowns=0
+[paper] heartbeat alive | open=4 | cooldowns=0
+[paper] TP1 SOL/USDT:USDT px=144.2600 close_qty=4.161118 pnl_add=1.16
+[paper] heartbeat alive | open=4 | cooldowns=0
+[paper] CLOSE ETH/USDT:USDT TP2 hit px=3297.7800 pnl=6.60USDT
+[paper] heartbeat alive | open=3 | cooldowns=1
+[paper] CLOSE SOL/USDT:USDT TP2 hit px=144.4800 pnl=3.24USDT
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] PLAN SOL/USDT:USDT entry=143.2803 sl=142.6800 tp1=143.8800 tp2=144.4797 qty=8.329169
+[paper] PLAN ETH/USDT:USDT entry=3293.2657 sl=3287.5014 tp1=3297.9600 tp2=3302.6543 qty=0.867408
+[paper] heartbeat alive | open=4 | cooldowns=0
+[paper] heartbeat alive | open=4 | cooldowns=0
+[paper] heartbeat alive | open=4 | cooldowns=0
+[paper] CANCEL SOL/USDT:USDT reason=ENTRY_TIMEOUT_1800s entry=143.2803
+[paper] CANCEL ETH/USDT:USDT reason=ENTRY_TIMEOUT_1800s entry=3293.2657
+[paper] heartbeat alive | open=2 | cooldowns=2
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] CLOSE BTC/USDT:USDT TP2 hit px=95282.0000 pnl=5.07USDT
+[paper] heartbeat alive | open=1 | cooldowns=1
+[paper] heartbeat alive | open=1 | cooldowns=0
+[paper] heartbeat alive | open=1 | cooldowns=0
+[paper] CLOSE ZEC/USDT:USDT SL hit px=401.7700 pnl=0.16USDT
+[paper] heartbeat alive | open=0 | cooldowns=1
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] PLAN SOL/USDT:USDT entry=143.6106 sl=143.0100 tp1=143.9000 tp2=144.1894 qty=8.325008
+[paper] PLAN BTC/USDT:USDT entry=95274.5059 sl=95107.7412 tp1=95414.8500 tp2=95555.1941 qty=0.029982
+[paper] FILLED BTC/USDT:USDT side=LONG entry=95274.5059 qty=0.029982
+[paper] FILLED SOL/USDT:USDT side=LONG entry=143.6106 qty=8.325008
+[paper] TP1 SOL/USDT:USDT px=143.9200 close_qty=4.162504 pnl_add=1.29
+[paper] TP1 BTC/USDT:USDT px=95419.9000 close_qty=0.014991 pnl_add=2.18
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] PLAN ZEC/USDT:USDT entry=401.1941 sl=399.7338 tp1=403.2000 tp2=405.2059 qty=3.423954
+[paper] FILLED ZEC/USDT:USDT side=LONG entry=401.1941 qty=3.423954
+[paper] heartbeat alive | open=3 | cooldowns=0
+[paper] CLOSE ZEC/USDT:USDT SL hit px=399.6800 pnl=-5.18USDT
+[paper] heartbeat alive | open=2 | cooldowns=1
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] CLOSE SOL/USDT:USDT TP2 hit px=144.1900 pnl=3.70USDT
+[paper] heartbeat alive | open=1 | cooldowns=1
+[paper] heartbeat alive | open=1 | cooldowns=0
+[paper] heartbeat alive | open=1 | cooldowns=0
+[paper] heartbeat alive | open=1 | cooldowns=0
+[paper] heartbeat alive | open=1 | cooldowns=0
+[paper] heartbeat alive | open=1 | cooldowns=0
+[paper] heartbeat alive | open=1 | cooldowns=0
+[paper] heartbeat alive | open=1 | cooldowns=0
+[paper] heartbeat alive | open=1 | cooldowns=0
+[paper] PLAN ETH/USDT:USDT entry=3315.3508 sl=3309.5489 tp1=3320.0150 tp2=3324.6792 qty=0.861787
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] FILLED ETH/USDT:USDT side=LONG entry=3315.3508 qty=0.861787
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] CLOSE ETH/USDT:USDT SL hit px=3305.5700 pnl=-8.43USDT
+[paper] heartbeat alive | open=1 | cooldowns=1
+[paper] heartbeat alive | open=1 | cooldowns=0
+[paper] heartbeat alive | open=1 | cooldowns=0
+[paper] heartbeat alive | open=1 | cooldowns=0
+[paper] PLAN SOL/USDT:USDT entry=144.0809 sl=143.4800 tp1=144.2450 tp2=144.4091 qty=8.320852
+[paper] FILLED SOL/USDT:USDT side=LONG entry=144.0809 qty=8.320852
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] PLAN ETH/USDT:USDT entry=3303.4332 sl=3297.6502 tp1=3310.4100 tp2=3317.3868 qty=0.864603
+[paper] heartbeat alive | open=3 | cooldowns=0
+[paper] PLAN ZEC/USDT:USDT entry=401.4984 sl=400.5024 tp1=402.9250 tp2=404.3516 qty=5.020080
+[paper] FILLED ZEC/USDT:USDT side=LONG entry=401.4984 qty=5.020080
+[paper] FILLED ETH/USDT:USDT side=LONG entry=3303.4332 qty=0.864603
+[paper] CLOSE BTC/USDT:USDT SL hit px=95098.7000 pnl=-3.09USDT
+[paper] CLOSE ETH/USDT:USDT SL hit px=3297.6000 pnl=-5.04USDT
+[paper] CLOSE SOL/USDT:USDT SL hit px=143.4800 pnl=-5.00USDT
+[paper] CLOSE ZEC/USDT:USDT SL hit px=400.5000 pnl=-5.01USDT
+[paper] heartbeat alive | open=0 | cooldowns=3
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] PLAN BTC/USDT:USDT entry=95066.5805 sl=94900.1292 tp1=95186.6000 tp2=95306.6195 qty=0.030039
+[paper] PLAN ZEC/USDT:USDT entry=399.5193 sl=398.5211 tp1=401.9350 tp2=404.3507 qty=5.009016
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] FILLED ZEC/USDT:USDT side=LONG entry=399.5193 qty=5.009016
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] CANCEL BTC/USDT:USDT reason=ENTRY_TIMEOUT_1800s entry=95066.5805
+[paper] heartbeat alive | open=1 | cooldowns=0
+[paper] PLAN BTC/USDT:USDT entry=95066.5475 sl=94900.1788 tp1=95186.6000 tp2=95306.6525 qty=0.030054
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] CLOSE ZEC/USDT:USDT SL hit px=398.5000 pnl=-5.11USDT
+[paper] heartbeat alive | open=1 | cooldowns=1
+[paper] heartbeat alive | open=1 | cooldowns=0
+[paper] FILLED BTC/USDT:USDT side=LONG entry=95066.5475 qty=0.030054
+[paper] TP1 BTC/USDT:USDT px=95191.2000 close_qty=0.015027 pnl_add=1.87
+[paper] heartbeat alive | open=1 | cooldowns=0
+[paper] PLAN SOL/USDT:USDT entry=143.5005 sl=142.9000 tp1=143.8950 tp2=144.2895 qty=8.326395
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] FILLED SOL/USDT:USDT side=LONG entry=143.5005 qty=8.326395
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] PLAN ZEC/USDT:USDT entry=398.4691 sl=397.2963 tp1=401.3350 tp2=404.2009 qty=4.263302
+[paper] FILLED ZEC/USDT:USDT side=LONG entry=398.4691 qty=4.263302
+[paper] heartbeat alive | open=3 | cooldowns=0
+[paper] heartbeat alive | open=3 | cooldowns=0
+[paper] CLOSE ZEC/USDT:USDT SL hit px=396.0000 pnl=-10.53USDT
+[paper] CLOSE SOL/USDT:USDT SL hit px=142.8400 pnl=-5.50USDT
+[paper] CLOSE BTC/USDT:USDT SL hit px=94837.9000 pnl=-5.00USDT
+[paper] heartbeat alive | open=0 | cooldowns=1
+[paper] PLAN ZEC/USDT:USDT entry=391.7525 sl=390.1463 tp1=397.2900 tp2=402.8275 qty=3.112937
+[paper] PLAN BTC/USDT:USDT entry=94885.9283 sl=94719.8575 tp1=95010.2000 tp2=95134.4717 qty=0.030108
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] PLAN ETH/USDT:USDT entry=3298.8594 sl=3293.0859 tp1=3304.7300 tp2=3310.6006 qty=0.866026
+[paper] FILLED ETH/USDT:USDT side=LONG entry=3298.8594 qty=0.866026
+[paper] CANCEL ZEC/USDT:USDT reason=ENTRY_TIMEOUT_1800s entry=391.7525
+[paper] CANCEL BTC/USDT:USDT reason=ENTRY_TIMEOUT_1800s entry=94885.9283
+[paper] heartbeat alive | open=1 | cooldowns=0
+[paper] PLAN BTC/USDT:USDT entry=94885.9218 sl=94719.8673 tp1=95010.2000 tp2=95134.4782 qty=0.030111
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] CANCEL BTC/USDT:USDT reason=ENTRY_TIMEOUT_1800s entry=94885.9218
+[paper] heartbeat alive | open=1 | cooldowns=0
+[paper] PLAN BTC/USDT:USDT entry=94885.9271 sl=94719.8594 tp1=95010.2000 tp2=95134.4729 qty=0.030108
+[paper] FILLED BTC/USDT:USDT side=LONG entry=94885.9271 qty=0.030108
+[paper] PLAN SOL/USDT:USDT entry=141.9118 sl=141.3000 tp1=142.8600 tp2=143.8082 qty=8.172605
+[paper] PLAN ZEC/USDT:USDT entry=391.6811 sl=389.9784 tp1=396.1350 tp2=400.5889 qty=2.936513
+[paper] heartbeat alive | open=4 | cooldowns=0
+[paper] FILLED ZEC/USDT:USDT side=LONG entry=391.6811 qty=2.936513
+[paper] heartbeat alive | open=4 | cooldowns=0
+[paper] TP1 BTC/USDT:USDT px=95015.0000 close_qty=0.015054 pnl_add=1.94
+[paper] heartbeat alive | open=4 | cooldowns=0
+[paper] CANCEL SOL/USDT:USDT reason=ENTRY_TIMEOUT_1800s entry=141.9118
+[paper] TP1 ETH/USDT:USDT px=3304.7300 close_qty=0.433013 pnl_add=2.54
+[paper] heartbeat alive | open=3 | cooldowns=0
+[paper] heartbeat alive | open=3 | cooldowns=0
+[paper] CLOSE ETH/USDT:USDT TP2 hit px=3310.9600 pnl=7.78USDT
+[paper] CLOSE BTC/USDT:USDT TP2 hit px=95139.9000 pnl=5.77USDT
+[paper] heartbeat alive | open=1 | cooldowns=2
+[paper] heartbeat alive | open=1 | cooldowns=0
+[paper] heartbeat alive | open=1 | cooldowns=0
+[paper] heartbeat alive | open=1 | cooldowns=0
+[paper] heartbeat alive | open=1 | cooldowns=0
+[paper] heartbeat alive | open=1 | cooldowns=0
+[paper] heartbeat alive | open=1 | cooldowns=0
+[paper] heartbeat alive | open=1 | cooldowns=0
+[paper] heartbeat alive | open=1 | cooldowns=0
+[paper] heartbeat alive | open=1 | cooldowns=0
+[paper] heartbeat alive | open=1 | cooldowns=0
+[paper] TP1 ZEC/USDT:USDT px=396.2200 close_qty=1.468257 pnl_add=6.66
+[paper] heartbeat alive | open=1 | cooldowns=0
+[paper] heartbeat alive | open=1 | cooldowns=0
+[paper] heartbeat alive | open=1 | cooldowns=0
+[paper] heartbeat alive | open=1 | cooldowns=0
+[paper] heartbeat alive | open=1 | cooldowns=0
+[paper] heartbeat alive | open=1 | cooldowns=0
+[paper] heartbeat alive | open=1 | cooldowns=0
+[paper] PLAN SOL/USDT:USDT entry=142.5398 sl=141.9400 tp1=142.6900 tp2=142.8402 qty=8.336112
+[paper] FILLED SOL/USDT:USDT side=LONG entry=142.5398 qty=8.336112
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] TP1 SOL/USDT:USDT px=142.6900 close_qty=4.168056 pnl_add=0.63
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] PLAN BTC/USDT:USDT entry=95075.4559 sl=94909.0662 tp1=95122.7000 tp2=95169.9441 qty=0.030050
+[paper] FILLED BTC/USDT:USDT side=LONG entry=95075.4559 qty=0.030050
+[paper] heartbeat alive | open=3 | cooldowns=0
+[paper] PLAN ETH/USDT:USDT entry=3306.5146 sl=3300.7281 tp1=3310.4450 tp2=3314.3754 qty=0.864080
+[paper] FILLED ETH/USDT:USDT side=LONG entry=3306.5146 qty=0.864080
+[paper] heartbeat alive | open=4 | cooldowns=0
+[paper] heartbeat alive | open=4 | cooldowns=0
+[paper] heartbeat alive | open=4 | cooldowns=0
+[paper] heartbeat alive | open=4 | cooldowns=0
+[paper] heartbeat alive | open=4 | cooldowns=0
+[paper] CLOSE SOL/USDT:USDT SL hit px=141.9400 pnl=-4.37USDT
+[paper] heartbeat alive | open=3 | cooldowns=0
+[paper] PLAN SOL/USDT:USDT entry=141.9094 sl=141.3100 tp1=142.3750 tp2=142.8406 qty=8.341675
+[paper] heartbeat alive | open=4 | cooldowns=0
+[paper] heartbeat alive | open=4 | cooldowns=0
+[paper] TP1 ETH/USDT:USDT px=3310.5900 close_qty=0.432040 pnl_add=1.76
+[paper] TP1 BTC/USDT:USDT px=95129.1000 close_qty=0.015025 pnl_add=0.81
+[paper] heartbeat alive | open=4 | cooldowns=0
+[paper] CANCEL SOL/USDT:USDT reason=ENTRY_TIMEOUT_1800s entry=141.9094
+[paper] heartbeat alive | open=3 | cooldowns=1
+[paper] CLOSE ETH/USDT:USDT TP2 hit px=3314.5000 pnl=5.21USDT
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] CLOSE ZEC/USDT:USDT TP2 hit px=400.6000 pnl=19.76USDT
+[paper] heartbeat alive | open=1 | cooldowns=1
+[paper] CLOSE BTC/USDT:USDT TP2 hit px=95176.6000 pnl=2.33USDT
+[paper] heartbeat alive | open=0 | cooldowns=1
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] PLAN BTC/USDT:USDT entry=95082.7612 sl=94916.3582 tp1=95136.8000 tp2=95190.8388 qty=0.030048
+[paper] heartbeat alive | open=1 | cooldowns=0
+[paper] FILLED BTC/USDT:USDT side=LONG entry=95082.7612 qty=0.030048
+[paper] PLAN SOL/USDT:USDT entry=142.1795 sl=141.5800 tp1=142.3200 tp2=142.4605 qty=8.340284
+[paper] FILLED SOL/USDT:USDT side=LONG entry=142.1795 qty=8.340284
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] TP1 SOL/USDT:USDT px=142.3400 close_qty=4.170142 pnl_add=0.67
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] PLAN ZEC/USDT:USDT entry=396.9091 sl=395.8113 tp1=398.7250 tp2=400.5409 qty=4.554564
+[paper] FILLED ZEC/USDT:USDT side=LONG entry=396.9091 qty=4.554564
+[paper] TP1 BTC/USDT:USDT px=95143.0000 close_qty=0.015024 pnl_add=0.91
+[paper] heartbeat alive | open=3 | cooldowns=0
+[paper] heartbeat alive | open=3 | cooldowns=0
+[paper] heartbeat alive | open=3 | cooldowns=0
+[paper] heartbeat alive | open=3 | cooldowns=0
+[paper] PLAN ETH/USDT:USDT entry=3319.1634 sl=3313.3549 tp1=3320.6250 tp2=3322.0866 qty=0.860807
+[paper] CLOSE ZEC/USDT:USDT SL hit px=395.8000 pnl=-5.05USDT
+[paper] heartbeat alive | open=3 | cooldowns=1
+[paper] PLAN ZEC/USDT:USDT entry=395.6566 sl=394.6151 tp1=397.7950 tp2=399.9334 qty=4.800768
+[paper] heartbeat alive | open=4 | cooldowns=0
+[paper] FILLED ZEC/USDT:USDT side=LONG entry=395.6566 qty=4.800768
+[paper] CLOSE ZEC/USDT:USDT SL hit px=393.1800 pnl=-11.89USDT
+[paper] heartbeat alive | open=3 | cooldowns=1
+[paper] CANCEL ETH/USDT:USDT reason=ENTRY_TIMEOUT_1800s entry=3319.1634
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] PLAN ETH/USDT:USDT entry=3317.3223 sl=3311.5165 tp1=3320.3750 tp2=3323.4277 qty=0.861208
+[paper] FILLED ETH/USDT:USDT side=LONG entry=3317.3223 qty=0.861208
+[paper] heartbeat alive | open=3 | cooldowns=0
+[paper] CLOSE BTC/USDT:USDT SL hit px=94906.4000 pnl=-4.39USDT
+[paper] heartbeat alive | open=2 | cooldowns=1
+[paper] PLAN BTC/USDT:USDT entry=94916.8473 sl=94750.7291 tp1=95001.4500 tp2=95086.0527 qty=0.030099
+[paper] FILLED BTC/USDT:USDT side=LONG entry=94916.8473 qty=0.030099
+[paper] heartbeat alive | open=3 | cooldowns=0
+[paper] TP1 BTC/USDT:USDT px=95100.1000 close_qty=0.015050 pnl_add=2.76
+[paper] CLOSE BTC/USDT:USDT TP2 hit px=95100.1000 pnl=5.52USDT
+[paper] TP1 ETH/USDT:USDT px=3322.5700 close_qty=0.430604 pnl_add=2.26
+[paper] CLOSE ETH/USDT:USDT TP2 hit px=3324.5500 pnl=5.37USDT
+[paper] heartbeat alive | open=1 | cooldowns=2
+[paper] heartbeat alive | open=1 | cooldowns=0
+[paper] heartbeat alive | open=1 | cooldowns=0
+[paper] heartbeat alive | open=1 | cooldowns=0
+[paper] CLOSE SOL/USDT:USDT TP2 hit px=142.5600 pnl=2.26USDT
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] PLAN ZEC/USDT:USDT entry=388.3189 sl=386.8716 tp1=391.4800 tp2=394.6411 qty=3.454709
+[paper] FILLED ZEC/USDT:USDT side=LONG entry=388.3189 qty=3.454709
+[paper] heartbeat alive | open=1 | cooldowns=0
+[paper] heartbeat alive | open=1 | cooldowns=0
+[paper] CLOSE ZEC/USDT:USDT SL hit px=386.0400 pnl=-7.87USDT
+[paper] heartbeat alive | open=0 | cooldowns=1
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] PLAN ZEC/USDT:USDT entry=386.0437 sl=384.6844 tp1=388.4300 tp2=390.8163 qty=3.678364
+[paper] FILLED ZEC/USDT:USDT side=LONG entry=386.0437 qty=3.678364
+[paper] heartbeat alive | open=1 | cooldowns=0
+[paper] heartbeat alive | open=1 | cooldowns=0
+[paper] PLAN SOL/USDT:USDT entry=141.8794 sl=141.2800 tp1=142.4850 tp2=143.0906 qty=8.341675
+[paper] FILLED SOL/USDT:USDT side=LONG entry=141.8794 qty=8.341675
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] TP1 ZEC/USDT:USDT px=388.5000 close_qty=1.839182 pnl_add=4.52
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] TP1 SOL/USDT:USDT px=142.4900 close_qty=4.170838 pnl_add=2.55
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] PLAN ETH/USDT:USDT entry=3337.5387 sl=3331.1669 tp1=3351.4850 tp2=3365.4313 qty=0.784708
+[paper] FILLED ETH/USDT:USDT side=LONG entry=3337.5387 qty=0.784708
+[paper] heartbeat alive | open=3 | cooldowns=0
+[paper] heartbeat alive | open=3 | cooldowns=0
+[paper] heartbeat alive | open=3 | cooldowns=0
+[paper] PLAN BTC/USDT:USDT entry=95307.0178 sl=95140.2232 tp1=95363.1000 tp2=95419.1822 qty=0.029977
+[paper] heartbeat alive | open=4 | cooldowns=0
+[paper] heartbeat alive | open=4 | cooldowns=0
+[paper] heartbeat alive | open=4 | cooldowns=0
+[paper] CANCEL BTC/USDT:USDT reason=ENTRY_TIMEOUT_1800s entry=95307.0178
+[paper] heartbeat alive | open=3 | cooldowns=1
+[paper] TP1 ETH/USDT:USDT px=3352.8100 close_qty=0.392354 pnl_add=5.99
+[paper] heartbeat alive | open=3 | cooldowns=0
+[paper] heartbeat alive | open=3 | cooldowns=0
+[paper] heartbeat alive | open=3 | cooldowns=0
+[paper] heartbeat alive | open=3 | cooldowns=0
+[paper] heartbeat alive | open=3 | cooldowns=0
+[paper] CLOSE ZEC/USDT:USDT TP2 hit px=390.9000 pnl=13.45USDT
+[paper] CLOSE ETH/USDT:USDT SL hit px=3330.2000 pnl=0.23USDT
+[paper] heartbeat alive | open=1 | cooldowns=1
+[paper] CLOSE SOL/USDT:USDT SL hit px=141.2800 pnl=-2.45USDT
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] PLAN SOL/USDT:USDT entry=133.3934 sl=132.8000 tp1=133.6800 tp2=133.9666 qty=8.426020
+[paper] FILLED SOL/USDT:USDT side=LONG entry=133.3934 qty=8.426020
+[paper] PLAN ETH/USDT:USDT entry=3196.0429 sl=3189.8357 tp1=3204.7350 tp2=3213.4271 qty=0.805516
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] FILLED ETH/USDT:USDT side=LONG entry=3196.0429 qty=0.805516
+[paper] TP1 ETH/USDT:USDT px=3205.0000 close_qty=0.402758 pnl_add=3.61
+[paper] TP1 SOL/USDT:USDT px=133.6900 close_qty=4.213010 pnl_add=1.25
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] heartbeat alive | open=2 | cooldowns=0
+[paper] PLAN BTC/USDT:USDT entry=92514.7645 sl=92352.8533 tp1=92608.7500 tp2=92702.7355 qty=0.030881
+[paper] FILLED BTC/USDT:USDT side=LONG entry=92514.7645 qty=0.030881
+[paper] heartbeat alive | open=3 | cooldowns=0
+[paper] heartbeat alive | open=3 | cooldowns=0
+[paper] heartbeat alive | open=3 | cooldowns=0
+[paper] CLOSE ETH/USDT:USDT SL hit px=3188.1100 pnl=-2.78USDT
+[paper] CLOSE SOL/USDT:USDT SL hit px=132.8000 pnl=-3.75USDT
+[paper] CLOSE BTC/USDT:USDT SL hit px=92344.6000 pnl=-5.25USDT
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0
+[paper] heartbeat alive | open=0 | cooldowns=0

@@ -1,0 +1,36 @@
+symbol: BTCUSDT
+
+timeframes:
+  trigger: 5m
+  context: 15m
+
+zones:
+  mode: auto
+  auto:
+    lookback_hours: 24
+    timeframe: 5m
+    swing_window: 3
+    atr_period: 14
+    zone_width_atr: 0.6
+    min_zone_width_pct: 0.001
+
+thresholds:
+  flush_return_5m: -0.008
+  breakout_fail_minutes: 15
+  divergence_return_15m: 0.004
+
+oi:
+  lookback_min: 15
+  slope_max_for_bull: 0.0
+
+cooldowns:
+  breakout_fail: 900
+  flush_reclaim: 900
+  divergence: 1800
+  breakdown_fail: 900
+
+execution_offset:
+  type: percent
+  value: 0.0005
+
+poll_seconds: 20

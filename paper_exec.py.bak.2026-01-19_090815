@@ -1,0 +1,485 @@
+#!/usr/bin/env python3
+import os, json, time, csv
+from dataclasses import dataclass, asdict
+from datetime import datetime, timezone
+from typing import Optional, Dict, Any, Tuple, List
+
+import ccxt  # pip install ccxt
+
+# -----------------------------
+# Config
+# -----------------------------
+SIGNALS_FILE = os.path.expanduser(os.getenv("SIGNALS_FILE", "~/apps/btc-alerts/signals.jsonl"))
+OUT_JSONL    = os.path.expanduser(os.getenv("OUT_JSONL", "~/apps/btc-alerts/paper_trades.jsonl"))
+OUT_CSV      = os.path.expanduser(os.getenv("OUT_CSV",   "~/apps/btc-alerts/paper_trades.csv"))
+STATE_FILE   = os.path.expanduser(os.getenv("PAPER_STATE_FILE", "~/apps/btc-alerts/paper_state.json"))
+
+EXCHANGE_ID = os.getenv("EXCHANGE_ID", "mexc")
+CCXT_DEFAULT_TYPE = os.getenv("CCXT_DEFAULT_TYPE", "swap")
+
+DEFAULT_LEVERAGE = int(os.getenv("DEFAULT_LEVERAGE", "5"))  # paper leverage (info)
+START_EQUITY = float(os.getenv("START_EQUITY", "1000.0"))
+RISK_PCT = float(os.getenv("RISK_PCT", "0.005"))  # 0.5% per trade
+
+POLL_SEC = float(os.getenv("POLL_SEC", "2.0"))
+
+# Safety / behavior
+MAX_OPEN_TRADES_PER_SYMBOL = int(os.getenv("MAX_OPEN_TRADES_PER_SYMBOL", "1"))
+ENTRY_TIMEOUT_SEC = int(os.getenv("ENTRY_TIMEOUT_SEC", "1800"))          # 30 min
+COOLDOWN_AFTER_TRADE_SEC = int(os.getenv("COOLDOWN_AFTER_TRADE_SEC", "300"))  # 5 min
+
+# Catch-up behavior (if offset invalid)
+SIGNALS_TAIL_LINES = int(os.getenv("SIGNALS_TAIL_LINES", "200"))
+
+# TP split
+TP1_CLOSE_FRAC = float(os.getenv("TP1_CLOSE_FRAC", "0.50"))
+
+# Heartbeat
+HEARTBEAT_SEC = int(os.getenv("HEARTBEAT_SEC", "600"))  # 10 min
+
+# -----------------------------
+# Helpers
+# -----------------------------
+def now_iso() -> str:
+    return datetime.now(timezone.utc).astimezone().isoformat(timespec="seconds")
+
+def safe_float(v: Any, default: float = float("nan")) -> float:
+    try:
+        return float(v)
+    except Exception:
+        return default
+
+def ensure_parent(path: str) -> None:
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+
+def append_jsonl(path: str, obj: Dict[str, Any]) -> None:
+    ensure_parent(path)
+    with open(path, "a", encoding="utf-8") as f:
+        f.write(json.dumps(obj, ensure_ascii=False) + "\n")
+
+def append_csv(path: str, row: Dict[str, Any], header: List[str]) -> None:
+    ensure_parent(path)
+    write_header = not os.path.exists(path) or os.path.getsize(path) == 0
+    with open(path, "a", newline="", encoding="utf-8") as f:
+        w = csv.DictWriter(f, fieldnames=header)
+        if write_header:
+            w.writeheader()
+        w.writerow({k: row.get(k, "") for k in header})
+
+def clamp(x: float, lo: float, hi: float) -> float:
+    return max(lo, min(hi, x))
+
+def load_state() -> Dict[str, Any]:
+    try:
+        with open(STATE_FILE, "r", encoding="utf-8") as f:
+            st = json.load(f)
+            return st if isinstance(st, dict) else {}
+    except Exception:
+        return {}
+
+def save_state(st: Dict[str, Any]) -> None:
+    ensure_parent(STATE_FILE)
+    tmp = STATE_FILE + ".tmp"
+    with open(tmp, "w", encoding="utf-8") as f:
+        json.dump(st, f, ensure_ascii=False, indent=2)
+    os.replace(tmp, STATE_FILE)
+
+# -----------------------------
+# Exchange (price only)
+# -----------------------------
+def make_exchange() -> ccxt.Exchange:
+    cls = getattr(ccxt, EXCHANGE_ID)
+    ex = cls({
+        "enableRateLimit": True,
+        "options": {"defaultType": CCXT_DEFAULT_TYPE},
+    })
+    return ex
+
+def fetch_last_price(ex: ccxt.Exchange, symbol: str) -> Optional[float]:
+    try:
+        t = ex.fetch_ticker(symbol)
+        last = t.get("last") or t.get("close")
+        return float(last) if last is not None else None
+    except Exception:
+        return None
+
+# -----------------------------
+# Paper Trade Model
+# -----------------------------
+@dataclass
+class PaperTrade:
+    trade_id: str
+    ts_created: str
+    ts_closed: str
+
+    exchange: str
+    market: str
+    symbol: str
+    symbol_raw: str
+    setup: str
+    regime: str
+
+    side: str  # LONG or SHORT
+    leverage: int
+    equity_start: float
+
+    status: str  # PLANNED / OPEN / PARTIAL / CLOSED / CANCELED
+
+    entry: float
+    sl: float
+    tp1: float
+    tp2: float
+    qty: float
+
+    filled_entry: float
+    filled_qty: float
+
+    tp1_hit: bool
+    tp1_qty_closed: float
+
+    pnl_usdt: float
+    pnl_pct_equity: float
+    close_reason: str
+
+    created_ts_unix: float
+    cooldown_until_unix: float
+
+# -----------------------------
+# Risk / sizing / plan
+# -----------------------------
+def infer_side_from_setup(setup: str) -> str:
+    u = (setup or "").upper()
+    if "SHORT" in u:
+        return "SHORT"
+    return "LONG"
+
+def plan_from_signal(evt: Dict[str, Any], equity: float) -> Optional[PaperTrade]:
+    try:
+        symbol = str(evt["symbol"]).strip()
+        if not symbol:
+            return None
+
+        symbol_raw = str(evt.get("symbol_raw", evt.get("symbolRaw", "")) or "").strip()
+        setup = str(evt["setup"]).strip()
+        regime = str(evt.get("regime", "")).strip()
+        market = str(evt.get("market", "futures")).strip()
+        exchange = str(evt.get("exchange", EXCHANGE_ID)).strip()
+
+        lower = evt.get("lower")
+        upper = evt.get("upper")
+        close = safe_float(evt.get("close"))
+
+        if not isinstance(lower, (list, tuple)) or len(lower) != 2:
+            return None
+        if not isinstance(upper, (list, tuple)) or len(upper) != 2:
+            return None
+
+        lower_lo, lower_hi = float(lower[0]), float(lower[1])
+        upper_lo, upper_hi = float(upper[0]), float(upper[1])
+
+        side = infer_side_from_setup(setup)
+
+        # Entry: clamp close into touched zone
+        entry = clamp(close, lower_lo, lower_hi) if side == "LONG" else clamp(close, upper_lo, upper_hi)
+
+        # SL buffer: simple and robust
+        if side == "LONG":
+            sl = lower_lo - max(0.5, (lower_hi - lower_lo) * 1.5)
+            tp2 = upper_lo
+            tp1 = (lower_hi + upper_lo) / 2.0
+        else:
+            sl = upper_hi + max(0.5, (upper_hi - upper_lo) * 1.5)
+            tp2 = lower_hi
+            tp1 = (upper_lo + lower_hi) / 2.0
+
+        entry = round(entry, 4)
+        sl = round(sl, 4)
+        tp1 = round(tp1, 4)
+        tp2 = round(tp2, 4)
+
+        risk_usdt = equity * RISK_PCT
+        per_unit_risk = abs(entry - sl)
+        if per_unit_risk <= 0:
+            return None
+
+        qty = round(risk_usdt / per_unit_risk, 6)
+
+        trade_id = f"{int(time.time())}-{symbol.replace('/','').replace(':','')}-{setup[:16]}"
+        return PaperTrade(
+            trade_id=trade_id,
+            ts_created=now_iso(),
+            ts_closed="",
+            exchange=exchange,
+            market=market,
+            symbol=symbol,
+            symbol_raw=symbol_raw,
+            setup=setup,
+            regime=regime,
+            side=side,
+            leverage=DEFAULT_LEVERAGE,
+            equity_start=equity,
+            status="PLANNED",
+            entry=entry,
+            sl=sl,
+            tp1=tp1,
+            tp2=tp2,
+            qty=qty,
+            filled_entry=0.0,
+            filled_qty=0.0,
+            tp1_hit=False,
+            tp1_qty_closed=0.0,
+            pnl_usdt=0.0,
+            pnl_pct_equity=0.0,
+            close_reason="",
+            created_ts_unix=time.time(),
+            cooldown_until_unix=0.0,
+        )
+    except Exception:
+        return None
+
+# -----------------------------
+# Persistence
+# -----------------------------
+CSV_HEADER = [
+    "ts_created","ts_closed","trade_id",
+    "exchange","market","symbol","symbol_raw","setup","regime",
+    "side","status","leverage",
+    "entry","sl","tp1","tp2","qty",
+    "filled_entry","filled_qty","tp1_hit","tp1_qty_closed",
+    "pnl_usdt","pnl_pct_equity","close_reason",
+]
+
+def persist_trade(t: PaperTrade) -> None:
+    row = asdict(t)
+    append_jsonl(OUT_JSONL, row)
+    append_csv(OUT_CSV, row, CSV_HEADER)
+
+# -----------------------------
+# Core logic
+# -----------------------------
+def event_key(evt: Dict[str, Any]) -> str:
+    # stable dedupe key (good enough)
+    return f"{evt.get('ts','')}-{evt.get('symbol','')}-{evt.get('setup','')}"
+
+def handle_signal_line(line: str,
+                       ex: ccxt.Exchange,
+                       equity: float,
+                       active: Dict[str, PaperTrade],
+                       cooldown_until: Dict[str, float],
+                       seen: Dict[str, float]) -> None:
+    line = (line or "").strip()
+    if not line:
+        return
+    try:
+        evt = json.loads(line)
+        if not isinstance(evt, dict):
+            return
+    except Exception:
+        return
+
+    sym = str(evt.get("symbol", "")).strip()
+    if not sym:
+        return
+
+    k = event_key(evt)
+    now = time.time()
+
+    # prune seen (6h)
+    for kk, ts in list(seen.items()):
+        if (now - ts) > 6 * 3600:
+            seen.pop(kk, None)
+
+    if k in seen:
+        return
+    seen[k] = now
+
+    # cooldown gate
+    if now < float(cooldown_until.get(sym, 0.0)):
+        return
+
+    # one active per symbol gate
+    if sym in active:
+        return
+
+    t = plan_from_signal(evt, equity)
+    if not t:
+        return
+
+    print(
+        f"[paper] PLAN {t.symbol} entry={t.entry:.4f} sl={t.sl:.4f} "
+        f"tp1={t.tp1:.4f} tp2={t.tp2:.4f} qty={t.qty:.6f}",
+        flush=True
+    )
+    active[sym] = t
+
+def manage_active_trades(ex: ccxt.Exchange,
+                         active: Dict[str, PaperTrade],
+                         cooldown_until: Dict[str, float]) -> None:
+    if not active:
+        return
+
+    now = time.time()
+    to_remove: List[str] = []
+
+    for sym, t in active.items():
+        # Entry timeout
+        if t.status == "PLANNED" and (now - t.created_ts_unix) > ENTRY_TIMEOUT_SEC:
+            t.status = "CANCELED"
+            t.ts_closed = now_iso()
+            t.close_reason = f"ENTRY_TIMEOUT_{ENTRY_TIMEOUT_SEC}s"
+            t.cooldown_until_unix = now + COOLDOWN_AFTER_TRADE_SEC
+            cooldown_until[sym] = t.cooldown_until_unix
+            persist_trade(t)
+            print(f"[paper] CANCEL {sym} reason={t.close_reason} entry={t.entry:.4f}", flush=True)
+            to_remove.append(sym)
+            continue
+
+        px = fetch_last_price(ex, sym)
+        if px is None:
+            continue
+
+        # Fill condition (simple)
+        if t.status == "PLANNED":
+            if (t.side == "LONG" and px <= t.entry) or (t.side == "SHORT" and px >= t.entry):
+                t.status = "OPEN"
+                t.filled_entry = t.entry
+                t.filled_qty = t.qty
+                print(f"[paper] FILLED {sym} side={t.side} entry={t.filled_entry:.4f} qty={t.filled_qty:.6f}", flush=True)
+
+        if t.status in ("OPEN", "PARTIAL"):
+            # SL
+            if (t.side == "LONG" and px <= t.sl) or (t.side == "SHORT" and px >= t.sl):
+                pnl = calc_pnl(t.side, t.filled_entry, px, t.filled_qty)
+                t.pnl_usdt += pnl
+                t.pnl_pct_equity = (t.pnl_usdt / t.equity_start) * 100.0 if t.equity_start > 0 else 0.0
+                t.status = "CLOSED"
+                t.ts_closed = now_iso()
+                t.close_reason = "SL"
+                t.cooldown_until_unix = now + COOLDOWN_AFTER_TRADE_SEC
+                cooldown_until[sym] = t.cooldown_until_unix
+                persist_trade(t)
+                print(f"[paper] CLOSE {sym} SL hit px={px:.4f} pnl={t.pnl_usdt:.2f}USDT", flush=True)
+                to_remove.append(sym)
+                continue
+
+            # TP1
+            if (not t.tp1_hit) and (
+                (t.side == "LONG" and px >= t.tp1) or (t.side == "SHORT" and px <= t.tp1)
+            ):
+                qty_close = t.filled_qty * TP1_CLOSE_FRAC
+                pnl = calc_pnl(t.side, t.filled_entry, px, qty_close)
+                t.pnl_usdt += pnl
+                t.tp1_hit = True
+                t.tp1_qty_closed = qty_close
+                t.status = "PARTIAL"
+                print(f"[paper] TP1 {sym} px={px:.4f} close_qty={qty_close:.6f} pnl_add={pnl:.2f}", flush=True)
+
+            # TP2 (close remaining)
+            rem_qty = t.filled_qty - t.tp1_qty_closed
+            if rem_qty > 0 and (
+                (t.side == "LONG" and px >= t.tp2) or (t.side == "SHORT" and px <= t.tp2)
+            ):
+                pnl = calc_pnl(t.side, t.filled_entry, px, rem_qty)
+                t.pnl_usdt += pnl
+                t.pnl_pct_equity = (t.pnl_usdt / t.equity_start) * 100.0 if t.equity_start > 0 else 0.0
+                t.status = "CLOSED"
+                t.ts_closed = now_iso()
+                t.close_reason = "TP2"
+                t.cooldown_until_unix = now + COOLDOWN_AFTER_TRADE_SEC
+                cooldown_until[sym] = t.cooldown_until_unix
+                persist_trade(t)
+                print(f"[paper] CLOSE {sym} TP2 hit px={px:.4f} pnl={t.pnl_usdt:.2f}USDT", flush=True)
+                to_remove.append(sym)
+                continue
+
+    for sym in to_remove:
+        active.pop(sym, None)
+
+def calc_pnl(side: str, entry: float, exit_px: float, qty: float) -> float:
+    if qty <= 0:
+        return 0.0
+    if side == "LONG":
+        return (exit_px - entry) * qty
+    return (entry - exit_px) * qty
+
+# -----------------------------
+# Main
+# -----------------------------
+def main() -> None:
+    equity = START_EQUITY
+    ensure_parent(SIGNALS_FILE)
+    if not os.path.exists(SIGNALS_FILE):
+        open(SIGNALS_FILE, "a", encoding="utf-8").close()
+
+    st = load_state()
+    last_offset = int(st.get("signals_offset", 0))
+    seen = st.get("seen_events", {})
+    if not isinstance(seen, dict):
+        seen = {}
+    # cast values to float
+    seen = {str(k): float(v) for k, v in seen.items() if k is not None}
+
+    ex = make_exchange()
+    cooldown_until: Dict[str, float] = {}
+    active: Dict[str, PaperTrade] = {}
+
+    print(f"[paper] start equity={equity} USDT, leverage={DEFAULT_LEVERAGE}x, risk={RISK_PCT*100:.2f}%", flush=True)
+    print(f"[paper] reading signals from {SIGNALS_FILE}", flush=True)
+    print(f"[paper] state={STATE_FILE} offset={last_offset} tail_lines={SIGNALS_TAIL_LINES}", flush=True)
+
+    last_heartbeat = time.time()
+    last_state_save = time.time()
+
+    with open(SIGNALS_FILE, "r", encoding="utf-8") as f:
+        # Decide where to start reading:
+        f.seek(0, os.SEEK_END)
+        size = f.tell()
+
+        if 0 <= last_offset <= size:
+            f.seek(last_offset, os.SEEK_SET)
+        else:
+            # fallback: tail last ~64KB and process last N lines
+            f.seek(max(0, size - 65536), os.SEEK_SET)
+            chunk = f.read()
+            lines = chunk.splitlines()[-SIGNALS_TAIL_LINES:]
+            for ln in lines:
+                handle_signal_line(ln, ex, equity, active, cooldown_until, seen)
+            # after catch-up, continue from end
+            f.seek(0, os.SEEK_END)
+
+        while True:
+            line = f.readline()
+            if not line:
+                manage_active_trades(ex, active, cooldown_until)
+
+                now = time.time()
+                if (now - last_heartbeat) >= HEARTBEAT_SEC:
+                    print(f"[paper] heartbeat alive | open={len(active)} | cooldowns={sum(1 for v in cooldown_until.values() if v>now)}", flush=True)
+                    last_heartbeat = now
+
+                # save state occasionally
+                if (now - last_state_save) >= 5.0:
+                    st2 = {
+                        "signals_offset": f.tell(),
+                        "seen_events": dict(list(seen.items())[-1000:]),  # cap
+                        "updated_at": now_iso(),
+                    }
+                    save_state(st2)
+                    last_state_save = now
+
+                time.sleep(POLL_SEC)
+                continue
+
+            # got a line: process and move on
+            handle_signal_line(line, ex, equity, active, cooldown_until, seen)
+
+            # save offset more aggressively right after consuming a line
+            st2 = {
+                "signals_offset": f.tell(),
+                "seen_events": dict(list(seen.items())[-1000:]),
+                "updated_at": now_iso(),
+            }
+            save_state(st2)
+
+if __name__ == "__main__":
+    main()

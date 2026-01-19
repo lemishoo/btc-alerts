@@ -1,0 +1,425 @@
+#!/usr/bin/env python3
+import os, json, time, csv
+from dataclasses import dataclass, asdict
+from datetime import datetime, timezone
+from typing import Optional, Dict, Any, Tuple, List
+
+import ccxt  # pip install ccxt
+
+# -----------------------------
+# Config
+# -----------------------------
+SIGNALS_FILE = os.path.expanduser(os.getenv("SIGNALS_FILE", "~/apps/btc-alerts/signals.jsonl"))
+OUT_JSONL    = os.path.expanduser(os.getenv("OUT_JSONL", "~/apps/btc-alerts/paper_trades.jsonl"))
+OUT_CSV      = os.path.expanduser(os.getenv("OUT_CSV",   "~/apps/btc-alerts/paper_trades.csv"))
+
+EXCHANGE_ID = os.getenv("EXCHANGE_ID", "mexc")
+DEFAULT_LEVERAGE = int(os.getenv("DEFAULT_LEVERAGE", "5"))  # paper leverage (info)
+START_EQUITY = float(os.getenv("START_EQUITY", "1000.0"))
+RISK_PCT = float(os.getenv("RISK_PCT", "0.005"))  # 0.5% per trade
+
+POLL_SEC = float(os.getenv("POLL_SEC", "2.0"))
+
+# Safety / behavior
+MAX_OPEN_TRADES_PER_SYMBOL = int(os.getenv("MAX_OPEN_TRADES_PER_SYMBOL", "1"))
+ENTRY_TIMEOUT_SEC = int(os.getenv("ENTRY_TIMEOUT_SEC", "1800"))          # 30 min default
+COOLDOWN_AFTER_TRADE_SEC = int(os.getenv("COOLDOWN_AFTER_TRADE_SEC", "300"))  # 5 min default
+
+# TP split
+TP1_CLOSE_FRAC = float(os.getenv("TP1_CLOSE_FRAC", "0.50"))  # 50% at TP1
+
+# -----------------------------
+# Helpers
+# -----------------------------
+def now_iso() -> str:
+    return datetime.now(timezone.utc).astimezone().isoformat(timespec="seconds")
+
+def safe_float(v: Any, default: float = float("nan")) -> float:
+    try:
+        return float(v)
+    except Exception:
+        return default
+
+def ensure_parent(path: str) -> None:
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+
+def append_jsonl(path: str, obj: Dict[str, Any]) -> None:
+    ensure_parent(path)
+    with open(path, "a", encoding="utf-8") as f:
+        f.write(json.dumps(obj, ensure_ascii=False) + "\n")
+
+def append_csv(path: str, row: Dict[str, Any], header: List[str]) -> None:
+    ensure_parent(path)
+    write_header = not os.path.exists(path) or os.path.getsize(path) == 0
+    with open(path, "a", newline="", encoding="utf-8") as f:
+        w = csv.DictWriter(f, fieldnames=header)
+        if write_header:
+            w.writeheader()
+        w.writerow({k: row.get(k, "") for k in header})
+
+def clamp(x: float, lo: float, hi: float) -> float:
+    return max(lo, min(hi, x))
+
+# -----------------------------
+# Exchange (price only)
+# -----------------------------
+def make_exchange() -> ccxt.Exchange:
+    cls = getattr(ccxt, EXCHANGE_ID)
+    ex = cls({
+        "enableRateLimit": True,
+        "options": {
+            # MEXC has futures/spot; ccxt unified market types vary by exchange.
+            # We'll try swap first; fallback to default if not supported.
+            "defaultType": os.getenv("CCXT_DEFAULT_TYPE", "swap"),
+        }
+    })
+    return ex
+
+def fetch_last_price(ex: ccxt.Exchange, symbol: str) -> Optional[float]:
+    try:
+        t = ex.fetch_ticker(symbol)
+        last = t.get("last", None)
+        if last is None:
+            last = t.get("close", None)
+        if last is None:
+            return None
+        return float(last)
+    except Exception:
+        return None
+
+# -----------------------------
+# Paper Trade Model
+# -----------------------------
+@dataclass
+class PaperTrade:
+    trade_id: str
+    ts_created: str
+    ts_closed: str
+
+    exchange: str
+    market: str
+    symbol: str
+    symbol_raw: str
+    setup: str
+    regime: str
+
+    side: str  # LONG or SHORT
+    leverage: int
+    equity_start: float
+
+    status: str  # PLANNED / OPEN / PARTIAL / CLOSED / CANCELED
+
+    entry: float
+    sl: float
+    tp1: float
+    tp2: float
+    qty: float
+
+    filled_entry: float
+    filled_qty: float
+
+    tp1_hit: bool
+    tp1_qty_closed: float
+
+    pnl_usdt: float
+    pnl_pct_equity: float
+    close_reason: str
+
+    created_ts_unix: float
+    cooldown_until_unix: float
+
+# -----------------------------
+# Risk / sizing / plan
+# -----------------------------
+def infer_side_from_setup(setup: str) -> str:
+    u = (setup or "").upper()
+    if "SHORT" in u:
+        return "SHORT"
+    return "LONG"
+
+def plan_from_signal(evt: Dict[str, Any], equity: float) -> Optional[Tuple[PaperTrade, Dict[str, Any]]]:
+    """
+    Expects signal event keys like:
+      symbol, symbol_raw, setup, regime, lower=[lo,hi], upper=[lo,hi], close=...
+    Returns (trade, meta) where meta contains zones for logging.
+    """
+    try:
+        symbol = str(evt["symbol"])
+        symbol_raw = str(evt.get("symbol_raw", evt.get("symbolRaw", "")) or "")
+        setup = str(evt["setup"])
+        regime = str(evt.get("regime", ""))
+        market = str(evt.get("market", "futures"))
+        exchange = str(evt.get("exchange", EXCHANGE_ID))
+
+        lower = evt.get("lower", None)
+        upper = evt.get("upper", None)
+        close = safe_float(evt.get("close"))
+
+        if not isinstance(lower, (list, tuple)) or len(lower) != 2:
+            return None
+        if not isinstance(upper, (list, tuple)) or len(upper) != 2:
+            return None
+
+        lower_lo, lower_hi = float(lower[0]), float(lower[1])
+        upper_lo, upper_hi = float(upper[0]), float(upper[1])
+
+        side = infer_side_from_setup(setup)
+
+        # For mean-revert lower-touch long:
+        # entry = clamp(close, lower_lo, lower_hi)
+        # sl just below lower_lo (buffer)
+        # tp1 toward mid (here use lower_hi -> upper_lo midpoint-ish), but we keep your TP1=upper_lo? (No)
+        # In your earlier plan you used tp1 ~ 3317 and tp2 ~ upper_lo. We'll keep:
+        #   tp1 = round((lower_hi + upper_lo)/2, 1) approx midrange
+        #   tp2 = upper_lo (or upper_hi?) -> keep upper_lo edge for conservative.
+        #
+        # For short variants you'd mirror it.
+
+        entry = clamp(close, lower_lo, lower_hi) if side == "LONG" else clamp(close, upper_lo, upper_hi)
+
+        if side == "LONG":
+            sl = lower_lo - max(0.5, (lower_hi - lower_lo) * 1.5)  # simple buffer
+            tp2 = upper_lo
+            tp1 = (lower_hi + upper_lo) / 2.0
+        else:
+            sl = upper_hi + max(0.5, (upper_hi - upper_lo) * 1.5)
+            tp2 = lower_hi
+            tp1 = (upper_lo + lower_hi) / 2.0
+
+        # Round a bit (optional)
+        entry = round(entry, 4)
+        sl = round(sl, 4)
+        tp1 = round(tp1, 4)
+        tp2 = round(tp2, 4)
+
+        risk_usdt = equity * RISK_PCT
+        per_unit_risk = abs(entry - sl)
+        if per_unit_risk <= 0:
+            return None
+
+        qty = risk_usdt / per_unit_risk
+        qty = round(qty, 6)
+
+        trade_id = f"{int(time.time())}-{symbol.replace('/','').replace(':','')}-{setup[:12]}"
+        t = PaperTrade(
+            trade_id=trade_id,
+            ts_created=now_iso(),
+            ts_closed="",
+
+            exchange=exchange,
+            market=market,
+            symbol=symbol,
+            symbol_raw=symbol_raw,
+            setup=setup,
+            regime=regime,
+
+            side=side,
+            leverage=DEFAULT_LEVERAGE,
+            equity_start=equity,
+
+            status="PLANNED",
+
+            entry=entry,
+            sl=sl,
+            tp1=tp1,
+            tp2=tp2,
+            qty=qty,
+
+            filled_entry=0.0,
+            filled_qty=0.0,
+
+            tp1_hit=False,
+            tp1_qty_closed=0.0,
+
+            pnl_usdt=0.0,
+            pnl_pct_equity=0.0,
+            close_reason="",
+
+            created_ts_unix=time.time(),
+            cooldown_until_unix=0.0,
+        )
+        meta = {"lower": [lower_lo, lower_hi], "upper": [upper_lo, upper_hi], "close": close}
+        return t, meta
+
+    except Exception:
+        return None
+
+# -----------------------------
+# Persistence
+# -----------------------------
+CSV_HEADER = [
+    "ts_created","ts_closed","trade_id",
+    "exchange","market","symbol","symbol_raw","setup","regime",
+    "side","status","leverage",
+    "entry","sl","tp1","tp2","qty",
+    "filled_entry","filled_qty","tp1_hit","tp1_qty_closed",
+    "pnl_usdt","pnl_pct_equity","close_reason",
+]
+
+def persist_trade(t: PaperTrade) -> None:
+    row = asdict(t)
+    append_jsonl(OUT_JSONL, row)
+    append_csv(OUT_CSV, row, CSV_HEADER)
+
+# -----------------------------
+# Main loop
+# -----------------------------
+def main() -> None:
+    equity = START_EQUITY
+    print(f"[paper] start equity={equity} USDT, leverage={DEFAULT_LEVERAGE}x, risk={RISK_PCT*100:.2f}%", flush=True)
+    print(f"[paper] reading signals from {SIGNALS_FILE}", flush=True)
+
+    ensure_parent(SIGNALS_FILE)
+    if not os.path.exists(SIGNALS_FILE):
+        open(SIGNALS_FILE, "a", encoding="utf-8").close()
+
+    ex = make_exchange()
+
+    # Track per-symbol cooldown + open trades
+    cooldown_until: Dict[str, float] = {}
+    active_trade_by_symbol: Dict[str, PaperTrade] = {}
+
+    # Tail file
+    with open(SIGNALS_FILE, "r", encoding="utf-8") as f:
+        f.seek(0, os.SEEK_END)
+
+        while True:
+            line = f.readline()
+            if not line:
+                # manage active trades even when no new signals
+                _manage_active_trades(ex, active_trade_by_symbol, cooldown_until)
+                time.sleep(POLL_SEC)
+                continue
+
+            line = line.strip()
+            if not line:
+                continue
+
+            try:
+                evt = json.loads(line)
+            except Exception:
+                continue
+
+            sym = str(evt.get("symbol", "")).strip()
+            if not sym:
+                continue
+
+            # Cooldown gate
+            now = time.time()
+            if now < float(cooldown_until.get(sym, 0.0)):
+                continue
+
+            # One active per symbol gate
+            if sym in active_trade_by_symbol:
+                continue
+
+            planned = plan_from_signal(evt, equity)
+            if not planned:
+                continue
+
+            trade, _meta = planned
+
+            print(
+                f"[paper] PLAN {trade.symbol} entry={trade.entry:.4f} sl={trade.sl:.4f} "
+                f"tp1={trade.tp1:.4f} tp2={trade.tp2:.4f} qty={trade.qty:.6f}",
+                flush=True
+            )
+
+            active_trade_by_symbol[sym] = trade
+
+            # After planning, we let _manage_active_trades handle fill/exits.
+
+def _manage_active_trades(ex: ccxt.Exchange,
+                          active: Dict[str, PaperTrade],
+                          cooldown_until: Dict[str, float]) -> None:
+    if not active:
+        return
+
+    now = time.time()
+    to_remove: List[str] = []
+
+    for sym, t in active.items():
+        # 1) ENTRY TIMEOUT (only if still planned)
+        if t.status == "PLANNED":
+            if (now - t.created_ts_unix) > ENTRY_TIMEOUT_SEC:
+                t.status = "CANCELED"
+                t.ts_closed = now_iso()
+                t.close_reason = f"ENTRY_TIMEOUT_{ENTRY_TIMEOUT_SEC}s"
+                t.cooldown_until_unix = now + COOLDOWN_AFTER_TRADE_SEC
+                cooldown_until[sym] = t.cooldown_until_unix
+                persist_trade(t)
+                print(f"[paper] CANCEL {sym} reason={t.close_reason} entry={t.entry:.4f}", flush=True)
+                to_remove.append(sym)
+                continue
+
+        px = fetch_last_price(ex, sym)
+        if px is None:
+            continue
+
+        # 2) FILL logic: for simplicity, assume fill when price crosses entry
+        if t.status == "PLANNED":
+            if (t.side == "LONG" and px <= t.entry) or (t.side == "SHORT" and px >= t.entry):
+                t.status = "OPEN"
+                t.filled_entry = t.entry
+                t.filled_qty = t.qty
+                print(f"[paper] FILLED {sym} side={t.side} entry={t.filled_entry:.4f} qty={t.filled_qty:.6f}", flush=True)
+
+        # 3) If open/partial, check SL/TP
+        if t.status in ("OPEN", "PARTIAL"):
+            # Stop loss
+            if (t.side == "LONG" and px <= t.sl) or (t.side == "SHORT" and px >= t.sl):
+                pnl = _calc_pnl(t.side, t.filled_entry, px, t.filled_qty)
+                t.pnl_usdt += pnl
+                t.pnl_pct_equity = (t.pnl_usdt / t.equity_start) * 100.0 if t.equity_start > 0 else 0.0
+                t.status = "CLOSED"
+                t.ts_closed = now_iso()
+                t.close_reason = "SL"
+                t.cooldown_until_unix = now + COOLDOWN_AFTER_TRADE_SEC
+                cooldown_until[sym] = t.cooldown_until_unix
+                persist_trade(t)
+                print(f"[paper] CLOSE {sym} SL hit px={px:.4f} pnl={t.pnl_usdt:.2f}USDT", flush=True)
+                to_remove.append(sym)
+                continue
+
+            # TP1
+            if (not t.tp1_hit) and (
+                (t.side == "LONG" and px >= t.tp1) or (t.side == "SHORT" and px <= t.tp1)
+            ):
+                qty_close = t.filled_qty * TP1_CLOSE_FRAC
+                pnl = _calc_pnl(t.side, t.filled_entry, px, qty_close)
+                t.pnl_usdt += pnl
+                t.tp1_hit = True
+                t.tp1_qty_closed = qty_close
+                t.status = "PARTIAL"
+                print(f"[paper] TP1 {sym} px={px:.4f} close_qty={qty_close:.6f} pnl_add={pnl:.2f}", flush=True)
+
+            # TP2 (close remaining)
+            rem_qty = t.filled_qty - t.tp1_qty_closed
+            if rem_qty > 0 and (
+                (t.side == "LONG" and px >= t.tp2) or (t.side == "SHORT" and px <= t.tp2)
+            ):
+                pnl = _calc_pnl(t.side, t.filled_entry, px, rem_qty)
+                t.pnl_usdt += pnl
+                t.pnl_pct_equity = (t.pnl_usdt / t.equity_start) * 100.0 if t.equity_start > 0 else 0.0
+                t.status = "CLOSED"
+                t.ts_closed = now_iso()
+                t.close_reason = "TP2"
+                t.cooldown_until_unix = now + COOLDOWN_AFTER_TRADE_SEC
+                cooldown_until[sym] = t.cooldown_until_unix
+                persist_trade(t)
+                print(f"[paper] CLOSE {sym} TP2 hit px={px:.4f} pnl={t.pnl_usdt:.2f}USDT", flush=True)
+                to_remove.append(sym)
+                continue
+
+    for sym in to_remove:
+        active.pop(sym, None)
+
+def _calc_pnl(side: str, entry: float, exit_px: float, qty: float) -> float:
+    if qty <= 0:
+        return 0.0
+    if side == "LONG":
+        return (exit_px - entry) * qty
+    return (entry - exit_px) * qty
+
+if __name__ == "__main__":
+    main()
